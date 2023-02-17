@@ -1,6 +1,6 @@
-The C Beginner's Handbook: https://www.freecodecamp.org/news/the-c-beginners-handbook/?inf_contact_key=e6b96b38469cc4469ce49d9b78767df5a61f15688044e0df333a256a7a7fd2ca
+## The C Beginner's Handbook: https://www.freecodecamp.org/news/the-c-beginners-handbook/?inf_contact_key=e6b96b38469cc4469ce49d9b78767df5a61f15688044e0df333a256a7a7fd2ca
 
-THE C BEGINNER'S HANDBOOK
+# THE C BEGINNER'S HANDBOOK
 
 C is probably the most widely known programming language. It one of the popular language learnt in school aside Python and Java.
 
@@ -101,6 +101,7 @@ int main(void)
 	printf("%u", age);
 }
 
+```
 the compiler will raise a warning at compile time and will convert the decimal number to an float value.
 
 C built-in data types are "int, char, short, long, float, double, long doublr". 

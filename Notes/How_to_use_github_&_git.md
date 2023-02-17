@@ -1,4 +1,4 @@
-Git & Git Hub (https://www.youtube.com/watch?v=8Dd7KRpKeaE)
+## Git & Git Hub (https://www.youtube.com/watch?v=8Dd7KRpKeaE)
 
 Git is a software that's a virtual control system which means it tracks change to files. It records changes in files and saves version of this file.
 
