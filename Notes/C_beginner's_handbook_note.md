@@ -50,7 +50,7 @@ int printf(const char *format, ...);
 
 The main function we defined above will be run by the operating system when the program is executed.
 
-How to execute a C program
+## How to execute a C program
 
 C is a compiled language and by default sometimes Linux and MacOS has in it the compiler 'gcc' already installed. You may have to run a Windows Subsystem for Linux for Windows system.
 
@@ -107,10 +107,189 @@ the compiler will raise a warning at compile time and will convert the decimal n
 C built-in data types are "int, char, short, long, float, double, long doublr". 
 
 
-Integer numbers:
+## Integer numbers:
 C provides us the following types to define integer values:
 
 * Char
 * int
 * short
 * long
+
+Most times you'll likely use an int to store an integer. But in other cased you might want to choose one of the other 3 options
+
+The "char" type is commonly used to store letters of the ASCII chart , but it can be used to hold small integers from -128 to 127. It takes at least 1 byte. 
+
+"int" takes at least 4 bytes. "short" takes at least 2 bytes. "long" takes at least 4 bytes.
+
+
+## Unsigned Integers:
+
+For all the above data types we can prepend "unsigned" to start the range at 0. Instead of a negative number. 
+
+* `unsigned char` will range from 0 to at least 255
+* `unsigned int` will range from 0 to at least 65,535
+* `unsigned short` will range from 0 to at least 65,535
+* `unsigned long` will range from 0 to at least 4, 294, 967, 295
+
+
+
+## The problem with overflow:
+	Given all those limits, a question might come up: how can we make sure our numbers do not exceed the limit? And what happens if we do exceed the limit?
+	If you have an `unsigned int` number at 255, and you increment it, you'll get 256 in return. As expected. If you have `unsigned char` number at 25, and you increment it, you'll get 0 in return. It resets starting from the initial possible value.
+	
+If you have a `unsigned char` number at 255 and you add 10 to it, you'll get the number 9:
+
+```C
+#include <stdio.h>
+
+int main(void){
+	unsigned char j = 255;
+	j = j + 10;
+	printf("%u", j); /* 9 */
+}
+
+```
+
+If you don't have a signed value, the behavior is undefined. It will basically give you a huge number which can vary, like in the case:
+
+```C
+
+#include <stdio.h>
+
+int main(void)
+{
+	char j = 127;
+	j = j + 10
+	printf("%u", j); /* 473902838 */
+}
+
+```
+In other words, C does not protect you fron going over the limits of a type. You need to take care of this yourself.
+
+
+## Warnings when declaring the wrong type
+
+When you declare the variable and initialize it with the wrong value, the `gcc` compiler (the one you're probably using) should warn you:
+
+```C
+#include <stdio.h>
+
+int main(void)
+{
+	char j = 1000;
+}
+
+```
+
+```bash
+hello.c:4:11: warning: implicit conversion 
+  from 'int' to
+      'char' changes value from 1000 to -24
+      [-Wconstant-conversion]
+        char j = 1000;
+             ~   ^~~~
+1 warning generated.
+```
+
+And it also warns you in direct assignments:
+
+```C
+
+#include <stdio.h>
+
+int main(void)
+{
+	char j;
+	j = 1000;
+}
+```
+
+But not if you increase the number using, for example, `+=`:
+
+```C
+#include <stdio.h>
+
+int main(void)
+{
+	char j = 0;
+	j += 1000;
+}
+```
+
+## Foating point numbers
+
+Floating point types can represent a much larger set of values than integers can, and can also represent fractions, something that integers can't do.
+
+Using floating point numbers, we represent numbers as decimal numbers time powers of 10.
+
+
+The following types:
+* float
+* double
+* long double
+
+are used to represent numbers with decimal points (floating point types). All can represent both positive and negative numbers.
+
+The minimum requirements for nay C implementation is that `float` can represent a range between 10^-37 and 10^+37, and is typically implemented usign 32 bits. `double` can represent a bigger set of numbers. `long double` can hold even more numbers. 
+
+The exact figures, as with integers values, depends on the implementation.
+
+On a modern Mac, a `float` is represented in 32 bits, and has a precision of 24 significant bits. 8 bits are used to encode the exponenets
+
+A `double` number is represented in 64 bits, with a precision of 53 significant bits. 11 bits are used to encode the exponent. The type `long double` is represented in 80 bits, has a precision of 64 significant bits. 15 bits are used to enode the exponent.
+
+On your specific computer, how can you determine the specific size of the types? You can write a program to do that:
+
+```C
+#include <stdio.h>
+
+int main(void)
+{
+	printf("char size: %lu bytes\n", sizeof(char));
+	printf("int size: %lu bytes\n", sizeof(int));
+	printf("short size: %lu bytes\n", sizeof(short));
+	printf("long size: %lu bytes\n", sizeof(long));
+	printf("float size: %lu bytes\n", sizeof(float));
+	printf("double size: %lu bytes\n", sizeof(double));
+	printf("long double size: %lu bytes\n", sizeof(long double));
+}
+
+```
+
+In my system, a modern Mac, it prints:
+
+```bash
+char size: 1 bytes
+int size: 4 bytes
+short size: 2 bytes
+long size: 8 bytes
+float size: 4 bytes
+double size: 8 bytes
+long double size: 16 bytes
+```
+
+## Constants
+
+A constant is declared similarly to variables, except it is prepended with the `const` keyword, and you always need to specify a value.
+
+Like this:
+
+```C
+const int age = 37;
+```
+
+It's perfectly valid although it's common to declare constants uppercase, like this:
+
+```C
+const int AGE = 37;
+```
+
+Another way to define constants is by using this syntax:
+
+```C
+#define AGE 37
+```
+
+
+
+
