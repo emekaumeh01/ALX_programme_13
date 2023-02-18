@@ -308,22 +308,385 @@ C offers us a wide variety of operators that we can use to operate on data.
 	
 Binary operators work using tqo operands:
 
-Operators | Name | Example
-`=` | Assignment | `a + b`
-`+` | addition | `a + b`
-`-` | subtraction | `a - b`
-`*` | Multiplication | `a * b`
-`\` | Division | `a / b`
-`%` | Modulo  | `a % b`
+Operators || Name || Example
+`=` || Assignment || `a + b`
+`+` || addition || `a + b`
+`-` || subtraction || `a - b`
+`*` || Multiplication || `a * b`
+`\` || Division || `a / b`
+`%` || Modulo  || `a % b`
 
 Unary operators only take one operand:
 
-Operator | Name | Example
-`+` | Unary plus | `+a`
-`-` | Unary minus | `-a`
-`++` | Increment | `a++` or `++a`
-`--` | Decrement | `a--` or `--a`
+Operator || Name || Example
+`+` || Unary plus || `+a`
+`-` || Unary minus || `-a`
+`++` || Increment || `a++` or `++a`
+`--` || Decrement || `a--` or `--a`
 
 The difference between a++ and ++a is that a++ increments the a variable after using it. ++a increments the a variable before using it. 
+
+For example: 
+
+```C
+int a = 2;
+int b;
+b = a++; / * b is 2, a is 3 */
+b = ++a; / * b is 4, a is 4 */
+```
+
+The same applies to the document operators.
+
+
+
+## Comparison operators
+
+Operator || Name || Example
+`==` || Equal operator || `a == b`
+`!=` || Not equal operator || `a != b`
+`>`  || Bigger than || ` a > b`
+'<'  || Less then  || `a < b`
+`>=` || Bigger than or equal to || `a >= b`
+`<=` || Less than or qeual to || `a <= b`
+
+
+## Logical operators
+
+* `!` NOT (example: `!a`)
+* `&&` AND (example: `a && b)
+* `||` OR (example: `a || b`)
+
+
+## Compound assignment operators
+
+These operators are useful to perform an assignment and at the same time perform an arithmetic operation:
+
+Operator || Name || Example
+`+=` || Addtition assignment || `a += b`
+`-=` || Subtraction assignment || `a -= b`
+`*=` || Multiplication assignment || `a *= b`
+`/=` || Division assignment || `a /= b`
+`%=` || Modulo assignment || `a %= b`
+
+
+## The ternary operator
+
+The ternary operator is the only operator in C that workswith 3 operands, and it's a short way to express conditionals
+
+```C
+<condition> ? <expression> : <expression>;
+```
+
+e.g:
+
+```C
+a ? b : c;
+```
+
+If a is evaluated to `true` then the b statement is executed, otherwise c is
+
+
+## Sizeof
+
+The `sizeof` operator return the size of the operand you pass. You can pass a variable, or even a type.
+
+Example usage:
+
+```C
+#include <stdio.h>
+
+int main(void)
+{
+	int age = 37;
+	printf("%ld\n", sizeof(age));
+	printf("%ld", sizeof(int));
+}
+
+```
+
+
+## Operator precedence
+
+Suppose we have this operation:
+
+```C
+int a = 2;
+int b = 4;
+int c = b + a * a / b - a;
+```
+
+What's the value of c?
+
+In order from less precedence to more precedence, we have:
+
+* the `=` assignment operator
+* the `+` and `-` binary operators
+* the `*` and `/` operators
+* the `+` and `-` unary operators
+
+Parentheses have higher priority over anything else.
+therefore we could rewrite the expression:
+
+```C
+int c = b + ((a * a) / b) - a;
+```
+
+## Conditionals
+
+Any programming language provides the programmers the ability to perform choices.
+
+C provides use 2 ways to do so.
+
+The first is the `if` statement, with its `else` helper, and the second is the `switch` statement
+
+## If
+
+In an `if` statement, you can check for a condition to be true, and then execute the block provided in the curly brackets:
+
+```C
+int a = 1;
+
+if (a == 1)
+{
+	/* do something */
+}
+```
+
+You can append an `else` block to execute a different block if the original condition turns out to be false:
+
+```C
+int a = 1;
+
+if (a == 2)
+{
+	/* do something */
+}
+else
+{
+	/* do something else */
+}
+
+```
+
+You can have multiple `else` blocks by stacking together multiple `if` statements:
+
+```C
+int a = 1;
+
+if (a == 2)
+{
+	/* do something */
+}
+else if (a == 1)
+{
+	/* do something else */
+}
+else
+{
+	/* do something else again */
+}
+```
+
+
+## switch 
+
+If you need to do too many if/else/if block to perform a check or perhaps check the value of a number then use a `switch` statement
+
+You can provide a variable as condition, and a series of `case` entry points for each value you expect:
+
+```C
+int a = 1;
+
+switch (a)
+{
+	case 0:
+		/* do something */
+	break;
+	case 1:
+		/* do something else */
+	break;
+	case 2:
+		/* do something else */
+	break;
+}
+```
+We need a `break` keyword at the end of each case to aviod th next case being executed when the one before ends. 
+
+You can add a "catch-all" case at the end, labeled `default`:
+
+```C
+int a = 1;
+
+switch (a)
+{
+	case 0:
+		/* do something */
+	break;
+	case 1:
+		/* do something else */
+	break;
+	case 2:
+		/* do something else */
+	break;
+	default:
+		/* handle all the other cases */
+	break;
+}
+```
+
+
+## Loops
+
+C offeres us three ways to perform a loop: for loos, while loops and dp while loops. 
+
+
+## For loops
+
+Using the `for` keyword we can define the rules of loop up front, and then provide the block that is going to be executed repeatedly.
+
+Like this:
+
+```C
+for (int i = 0; i <= 10; i++)
+{
+	/* instruction to be repested */
+}
+```
+
+The `(int i = 0; i <= 10; i++)` block contains 3 parts of the looping details:
+* the initial condition `(int i = 0)
+* the test `(i <= 10)`
+* the increment `i++`
+
+This program should print `0 1 2 3 4 5 6 7 8 9 10`
+
+```C
+for (int i = 0; i <= 10; i++)
+{
+	/* instructions to be repeated */
+	printf("%u ", i);
+}
+```
+
+Loops can also start from a high number, and go a lower number.
+
+
+## While loops
+
+While loops is simpler to write than a `for` loop, because it requires a bit more work on your part. Instead of defining all the loop data up front when you start the loop, like you do in the `for` loop, using `while` you jst check for a condition.
+
+```C
+while (i < 10)
+{
+	/* do something */
+}
+```
+
+And this loop is will be an infinite loop unless you increment the `i` variable at some point inside the loop.
+
+The correct form of `while loop`:
+
+```C
+int i = 0;
+
+
+while (i < 10)
+{
+	/* do something */
+	i++;
+}
+```
+
+
+## Do while loops
+While loops are great, but there might be times when you need to do one particular thing: you want to always execute a block, and then maybe repeat it.
+
+This is done using the `do while` keyword. In a way it's very similar to a `while` loop, but slightly different:
+
+```C
+int i = 0;
+
+do {
+	/* do something */
+	
+	i++;
+} while (i < 10);
+
+```
+The block that contains the /* do something */ comments is always executed at least once, regardless of thecondition check at the bottom.
+
+Then until `i` is less than 10, we'll repeat the block.
+
+## Breaking out of a loop using `break`
+
+To break out of a loop at any point in time you can use the `break` keyword. This is useful in many cases. You might want to check for the value of a varible, for example:
+
+```C
+for (int i = 0; i <= 10; i++)
+{
+	if (i == 4 && someVariable == 10)
+	{
+		break;
+	}
+}
+```
+
+## Arrays
+
+An array is a variable that stores multiple values. 
+
+Every value in the array, in C, must have the same type. This means you will have arrays of `int` values, arrays of `double` values, and more.
+
+you can define an array of `int` values like this:
+
+```C
+int prices[5];
+```
+
+You must always specify the size of the array. C does not provide dynamic arrays out of the box ( you have to use a data structure like linked list for that).
+
+You can use a constant to define the size:
+
+```C
+const SIZE = 5;
+int prices[SIZE];
+```
+
+
+You can initialize an array at definition time, like this:
+
+```C
+int prices[5] = {1, 2, 3, 4, 5};
+```
+
+But you can also assign a value after the definition, in this way:
+
+
+```C
+int prices[5];
+
+prices[0] = 1;
+prices[1] = 2;
+prices[2] = 3;
+prices[3] = 4;
+prices[4] = 5;
+```
+
+Or more practical, using a loop:
+
+```C
+int prices[5];
+
+for (int 1 = 0; i < 5; i++)
+{
+	prices[i] = i + 1;
+}
+```
+
+And you can reference an item in the array by using square brackets after the array variable name, adding an integer to determine the index value. Like this:
+
+```C
+
+
 
 
