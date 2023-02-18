@@ -290,6 +290,40 @@ Another way to define constants is by using this syntax:
 #define AGE 37
 ```
 
+## Operators
 
+C offers us a wide variety of operators that we can use to operate on data.
+
+* arithmetic operators
+* comparison operators
+* logical operators
+* compound assignment operators
+* bitwise operators
+* pointer operators
+* structure operators
+
+
+## Arithmetic operators
+	In this macro group I am going to seperate binary operators and unary operators/
+	
+Binary operators work using tqo operands:
+
+Operators | Name | Example
+`=` | Assignment | `a + b`
+`+` | addition | `a + b`
+`-` | subtraction | `a - b`
+`*` | Multiplication | `a * b`
+`\` | Division | `a / b`
+`%` | Modulo  | `a % b`
+
+Unary operators only take one operand:
+
+Operator | Name | Example
+`+` | Unary plus | `+a`
+`-` | Unary minus | `-a`
+`++` | Increment | `a++` or `++a`
+`--` | Decrement | `a--` or `--a`
+
+The difference between a++ and ++a is that a++ increments the a variable after using it. ++a increments the a variable before using it. 
 
 
